@@ -22,7 +22,7 @@ You are an assistant that receives a list of ingredients that a user has and sug
 
 export async function getRecipeFromMistral(ingredientsArr) {
      try {
-        const res = await fetch("http://localhost:3000/api/recipe", {
+        const res = await fetch("https://recipe-app-backend-gdni.onrender.com/api/recipe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -37,3 +37,4 @@ export async function getRecipeFromMistral(ingredientsArr) {
         return "Sorry, failed to fetch a recipe.";
     }
 }
+
