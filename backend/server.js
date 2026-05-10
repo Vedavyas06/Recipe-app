@@ -21,7 +21,7 @@ app.post('/api/recipe', async (req, res) => {
 
     try {
         const result = await hf.chatCompletion({
-            model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+            model: "microsoft/Phi-3-mini-4k-instruct",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 { role: "user", content: `I have ${ingredients.join(", ")}. Please give me a recipe you'd recommend I make!` },
