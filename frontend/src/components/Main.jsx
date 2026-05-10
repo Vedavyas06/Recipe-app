@@ -7,6 +7,7 @@ export default function Main() {
     const [ingredients, setIngredients] = React.useState(
         []
     )
+    const [loading, setLoading] = React.useState(false)
     const [recipe, setRecipe] = React.useState("")
     const recipeSection = React.useRef(null)
     
@@ -17,8 +18,16 @@ export default function Main() {
     }, [recipe])
 
     async function getRecipe() {
-        const recipeMarkdown = await getRecipeFromMistral(ingredients)
-        setRecipe(recipeMarkdown)
+        try{
+            setLoading(true)
+            const recipeMarkdown = await getRecipeFromMistral(ingredients)
+            setRecipe(recipeMarkdown)
+        } catch (error) {
+            console.error("Error fetching recipe:", error)
+        } finally {
+            setLoading(false)
+        }
+        
     }
 
     function addIngredient(formData) {
@@ -43,6 +52,7 @@ export default function Main() {
                     ref={recipeSection}
                     ingredients={ingredients}
                     getRecipe={getRecipe}
+                    loading={loading}
                 />
             }
 
